@@ -38,6 +38,7 @@ class Event {
         );
         return rows[0]?.image_path;
     }
+
     static async getById(id) {
         const [rows] = await pool.query(
             "SELECT * FROM operation_bijoy WHERE id = ?",

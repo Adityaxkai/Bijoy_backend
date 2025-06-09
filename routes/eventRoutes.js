@@ -11,16 +11,16 @@ import {
 
 const router = express.Router();
 
-// Public routes
-router.get('/public', getPublicEvents); 
-router.get('/updates', getRecentEvents);
+// 🔓 Public Routes
+router.get('/public', getPublicEvents);          // Publicly accessible events
+router.get('/updates', getRecentEvents);         // Real-time updates via SSE
 
-// Admin routes
-router.get('/admin/list', verifyToken, isAdmin, getEvents);
-router.post('/admin/create', verifyToken, isAdmin, upload.single('image'), createEvent);
-router.delete('/admin/delete/:id', verifyToken, isAdmin, deleteEvent);
+// 🔐 Admin Routes
+router.get('/admin/list', verifyToken, isAdmin, getEvents);               // Get all events (admin)
+router.post('/admin/create', verifyToken, isAdmin, upload.single('image'), createEvent); // Create new event
+router.delete('/admin/delete/:id', verifyToken, isAdmin, deleteEvent);    // Delete event by ID
 
-// Fallback route
-router.get('/', (req, res) => res.status(200).json({ message: 'Events API' }));
+// 📄 Default API base check
+router.get('/', (req, res) => res.status(200).json({ message: 'Events API is running' }));
 
 export default router;
